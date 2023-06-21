@@ -4,7 +4,11 @@ import Spinner from "../spinner";
 
 const MovieList = ({ movies, koncut, dateFormatting, loading }) => {
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="spinner-container">
+        <Spinner />
+      </div>
+    );
   }
   return (
     <div className="movie-list-container">
@@ -33,7 +37,7 @@ const MovieList = ({ movies, koncut, dateFormatting, loading }) => {
                 <span></span>
               </div>
               <div className="movie-description">
-                <span>{koncut(movie.overview, 150)}</span>
+                <span>{koncut(movie.overview, 200)}</span>
               </div>
             </div>
             <div className="omvie-rating"></div>

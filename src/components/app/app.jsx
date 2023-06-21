@@ -5,6 +5,8 @@ import MovieList from "../movie-list";
 import Footer from "../footer";
 import SearchPannel from "../search-pannel";
 
+let actualPage = 1;
+
 function koncut(text, limit) {
   const re = new RegExp("(^.{" + (limit - 1) + "}([^ ]+|\\s))(.*)");
   const result = text.replace(re, "$1");
@@ -30,29 +32,33 @@ function dateFormatting(data) {
   return format(dat, "MMMM dd, yyyy");
 }
 
+function pageAdd(page) {
+  actualPage = page;
+}
+
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const getMovieRequest = async (searchValue) => {
-      const url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&api_key=70a43d27a64c944d2799317923feaa57&page=1`;
-      try {
-        const response = await fetch(url);
-        const responseJson = await response.json();
-        const results = responseJson.results;
-        if (results) {
-          setMovies(results);
-          setLoading(false);
-        }
-      } catch {
-        alert(
-          `Вероятно у вас не включен VPN.
-	Для работы приложения требуется исползовать VPN`
-        );
+  const getMovieRequest = async (searchValue) => {
+    const url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&api_key=70a43d27a64c944d2799317923feaa57&page=${actualPage}`;
+    try {
+      const response = await fetch(url);
+      const responseJson = await response.json();
+      const results = responseJson.results;
+      if (results) {
+        setMovies(results);
+        setLoading(false);
       }
-    };
+    } catch {
+      alert(
+        `Вероятно у вас не включен VPN.
+  Для работы приложения требуется исползовать VPN`
+      );
+    }
+  };
+  useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
@@ -71,7 +77,11 @@ const App = () => {
         loading={loading}
         setLoading={setLoading}
       />
-      <Footer movies={movies} />
+      <Footer
+        getMovieRequest={getMovieRequest}
+        searchValue={searchValue}
+        pageAdd={pageAdd}
+      />
     </div>
   );
 };
