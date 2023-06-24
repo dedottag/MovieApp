@@ -1,15 +1,10 @@
 import React from "react";
-import "./movie-list.css";
 import Spinner from "../spinner";
 import { Rate } from "antd";
+import "../movie-list/movie-list.css";
+import { Button } from "antd";
 
-const MovieList = ({
-  movies,
-  koncut,
-  dateFormatting,
-  loading,
-  handleRated,
-}) => {
+const RatedList = ({ movies, koncut, dateFormatting, loading, removeFilm }) => {
   if (loading) {
     return (
       <div className="spinner-container">
@@ -29,11 +24,6 @@ const MovieList = ({
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt="image not found"
             />
-            {/* <img
-              className="movie-logo"
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={"image not found"}
-            ></img> */}
           </div>
 
           <div className="movie-information">
@@ -51,17 +41,27 @@ const MovieList = ({
                 <span></span>
               </div>
               <div className="movie-description">
-                <span>{koncut(movie.overview, 240)}</span>
+                <span>{koncut(movie.overview, 200)}</span>
               </div>
             </div>
             <div className="movie-rating-container">
+              <div className="remove-rated">
+                <Button
+                  className="remove-rated-button"
+                  block={true}
+                  size="small"
+                  shape="default"
+                  onClick={() => {
+                    removeFilm(movie);
+                  }}
+                >
+                  delete
+                </Button>
+              </div>
               <Rate
                 allowHalf
                 defaultValue={Math.round(movie.vote_average * 10) / 10}
                 count={10}
-                onChange={() => {
-                  handleRated(movie);
-                }}
                 style={{ fontSize: "17px" }}
               />
             </div>
@@ -72,4 +72,4 @@ const MovieList = ({
   );
 };
 
-export default MovieList;
+export default RatedList;

@@ -1,8 +1,8 @@
 .search-pannel {
-  width: 960px;
+  width: 100%;
   height: 30px;
   border-radius: 5px;
-  border: 1px rgb(136, 131, 131) solid;
+  border: 1px rgba(136, 131, 131, 0.655) solid;
   font-size: 20px;
   margin: 20px 10px 20px 10px;
 }
