@@ -3,6 +3,21 @@ import "./movie-list.css";
 import Spinner from "../spinner";
 import { Rate } from "antd";
 
+let clas = "";
+function cls(number) {
+  if (number < 3) {
+    clas = "cE90000";
+  } else if (number >= 3 && number < 5) {
+    clas = "cE97E00";
+  } else if (number >= 5 && number < 7) {
+    clas = "cE9D100";
+  } else {
+    clas = "cE66E900";
+  }
+  console.log(clas);
+  return clas;
+}
+
 const MovieList = ({
   movies,
   koncut,
@@ -39,7 +54,7 @@ const MovieList = ({
           <div className="movie-information">
             <div className="movie-info-header">
               <span className="movie-name">{movie.title}</span>
-              <div className="movie-estimation">
+              <div className={`movie-estimation ${cls(movie.vote_average)}`}>
                 {Math.round(movie.vote_average * 10) / 10}
               </div>
             </div>

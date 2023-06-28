@@ -8,7 +8,7 @@
   width: 180px;
 }
 .movie-logo-container :hover {
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.998);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.883);
   width: auto;
   z-index: 1;
   transition: 0.5s;
@@ -23,7 +23,7 @@
   justify-content: space-between;
   text-align: center;
   margin: 15px;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.466);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.262);
   font-family: normal;
 }
 .movie-list-container {
@@ -47,13 +47,25 @@
 }
 .movie-estimation {
   border-radius: 50%;
-  border: 3px solid rgb(239, 181, 7);
   width: 35px;
   height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.movie-estimation.cE66E900 {
+  border: 3px solid #66e900;
+}
+.movie-estimation.cE90000 {
+  border: 3px solid #e90000;
+}
+.movie-estimation.cE97E00 {
+  border: 3px solid #e97e00;
+}
+.movie-estimation.cE9D100 {
+  border: 3px solid #e9d100;
+}
+
 .movie-name {
   width: 200px;
   display: flex;
